@@ -68,4 +68,4 @@ ollama create myQwen2.5-3B -f Modelfile
 ollama run myQwen2.5-3B
 ```
 
-# 参考：https://blog.csdn.net/qq_42374233/article/details/144180042
+## 参考：https://blog.csdn.net/qq_42374233/article/details/144180042
