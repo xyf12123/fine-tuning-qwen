@@ -8,7 +8,7 @@ Installation Tools:
 编译工具：https://cmake.org/download,  https://github.com/ggerganov/llama.cpp.git
 量化工具：https://github.com/ggerganov/llama.cpp/releases/llama-b4295-bin-win-noavx-x64.zip
 
-整体流程：
+整体流程:
 1. LLaMA-Factory项目用于微调qwen模型
 2. llama.cpp项目用于safetensors格式转gguf模型格式
 3. llama-b4295-bin-win-noavx-x64 用于gguf格式量化
@@ -22,7 +22,7 @@ cd LLaMA-Factory
 pip install -e ".[torch,metrics]"
 
 2. 创建自己数据集
-参考LLaMA-Factory/data/identity.json格式创建自己数据集。
+参考LLaMA-Factory/data/identity.json格式创建自己数据集.
 修改LLaMA-Factory/data/dataset_info.json中数据集的映射
 
 3. 进入webui的微调界面
@@ -30,14 +30,14 @@ llamafactory-cli webui
 
 4. 设置微调参数及数据集文件.
 
-5. 开始训练
+5. 开始训练.
 
-6. 训练结束后，在chat菜单栏测试微调效果。(可选)
+6. 训练结束后, 在chat菜单栏测试微调效果.(可选)
 
-7. 在export菜单栏指定导出路径后导出模型文件。在指定路径下生成几个model-0000X-of-0000X.safetensors模型
+7. 在export菜单栏指定导出路径后导出模型文件. 在指定路径下生成几个model-0000X-of-0000X.safetensors模型
 
 # 编译及模型格式转换
-8. 安装cmake工具。
+8. 安装cmake工具
 win下载地址：https://cmake.org/download, 解压后设置环境变量, cmd查看 cmake -version.
 安装MinGW/Visual Studio 编译器. 参考https://www.cnblogs.com/hack747/p/18547314
 
@@ -57,24 +57,9 @@ python convert_hf_to_gguf.py D:\myQwen2.5-7B
 生成一个较小体积的gguf文件
 
 # ollama模型部署
-11. 新建Modelfile文件，输入：
+11. 复制Modelfile文件到myQwen2.5-7B-Q4_K_M.gguf模型目录.
 
-FROM ./myQwen2.5-7B-Q4_K_M.gguf
-TEMPLATE """{{ if .System }}<|start_header_id|>system<|end_header_id|>
-
-{{ .System }}<|eot_id|>{{ end }}{{ if .Prompt }}<|start_header_id|>user<|end_header_id|>
-
-{{ .Prompt }}<|eot_id|>{{ end }}<|start_header_id|>assistant<|end_header_id|>
-
-{{ .Response }}<|eot_id|>"""
-SYSTEM """You are a helpful assistant. 你是一个乐于助人的助手。"""
-PARAMETER temperature 0.2
-PARAMETER num_keep 24
-PARAMETER stop <|start_header_id|>
-PARAMETER stop <|end_header_id|>
-PARAMETER stop <|eot_id|>
-
-12. ollama部署：
+12. ollama部署
 ollama create myQwen2.5-3B -f Modelfile
 ollama run myQwen2.5-3B
 
